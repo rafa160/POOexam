@@ -38,6 +38,19 @@ public class WebControllerDespesa {
         return  result + "</html>";
     }
 
+    @RequestMapping("/findallinbd")
+    public String findAllBd(){
+        String result = "<html>";
+        for (Despesa despesa : repository.findAll()){
+            result += "<div>" + despesa.toStringDespesa() + "</div>";
+        }
+        for(Receita receita : receitaRepository.findAll()) {
+              result += "<div>" + receita.toString() + "</div>";
+        }
+
+        return result + "</html>";
+    }
+
     @RequestMapping("/findbyiddespesa")
     public String findById(@RequestParam("id") long id){
         String result = "";
