@@ -58,9 +58,13 @@ public class WebControllerReceita {
         return result + "</html>";
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("/deletereceita")
     public String delete(@RequestParam("id") long id){
-        return null;
+        Receita receitaDB = new Receita();
+        receitaDB.setId(id);
+        repository.findById(receitaDB.getId());
+        repository.delete(receitaDB);
+        return "Deletado";
     }
 
 

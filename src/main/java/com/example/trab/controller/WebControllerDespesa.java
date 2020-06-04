@@ -21,7 +21,6 @@ public class WebControllerDespesa {
     @RequestMapping("/savedespesa")
     public String process() throws Exception{
         Despesa despesa = new Despesa();
-        despesa.setId(1);
         despesa.setDescription("Pagamento OI");
         despesa.setValue(60.00);
         repository.save(despesa);
@@ -58,6 +57,15 @@ public class WebControllerDespesa {
         return  result;
     }
 
+    @RequestMapping("/deletedespesa")
+    public String delete(@RequestParam("id") long id){
+        Despesa despesaDB = new Despesa();
+        despesaDB.setId(id);
+        repository.findById(despesaDB.getId());
+        repository.delete(despesaDB);
+        return "Deletado";
+    }
+
     @RequestMapping("findbydescdespesa")
     public String findByDesc(@RequestParam("description") String description){
         String result = "<html>";
@@ -68,5 +76,4 @@ public class WebControllerDespesa {
 
         return result + "</html>";
     }
-
 }
